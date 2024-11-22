@@ -15,8 +15,8 @@
 
 
 
-(add-to-list 'load-path "/home/aaron/devel/emacs.packages/isend-mode.el")
-(require 'isend)
+(add-to-list 'load-path "~/devel/emacs.packages/isend-mode")
+(require 'isend-mode)
 
 (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
 
