@@ -1,0 +1,3 @@
+[submodule "isend-mode.el"]
+	path = isend-mode.el
+	url = git@github.com:ffevotte/isend-mode.el.git
