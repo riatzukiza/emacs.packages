@@ -1,4 +1,3 @@
-
 (defun sibilant-associate-main ()
   (interactive)
   (setf isend--command-buffer "*sibilant*"))
@@ -8,38 +7,57 @@
    ;; Terminal buffer: specifically call `term-send-input'
    ;; to handle both the char and line modes of `ansi-term'.
    ((eq major-mode 'term-mode)
+    (print "term mode detected")
     (term-send-input))
 
    ;; Other buffer: call whatever is bound to 'RET'
-   (t (funcall (key-binding (kbd "RET"))))))
+   (t (print "not term mode detected")
+      (funcall (key-binding (kbd "RET"))))))
 
 (defun send-sibilant-buffer ()
 
   (interactive)
 
-  (print "failing harder")
-
   (let ((b isend--command-buffer)
-        (d default-directory))
+        (d default-directory)
+        (cb (current-buffer)))
 
 
-    (save-excursion
+    (print d)
+    (let ((prefix-sibilant-dir (concat   "(meta (assign sibilant.dir \"" d "\") null)"))
+          (prefix-sibilant-add-to-lookup (concat   "(add-to-module-lookup\"" d "\")"))
+          (postfix-sibilant-reset-dir (concat   "(meta (assign sibilant.dir  \"./\") null)")))
 
-      (set-buffer b)
+      ;; (insert "\n")
 
-      (insert (concatenate 'string "(meta (assign sibilant.dir \"" d "\") null)"))
 
-      (insert (concatenate 'string "(add-to-module-lookup\"" d "\")"))
-      (insert "\n")
-      (end-term-input))
+      (save-excursion
 
-    (isend-send-buffer)
+        (set-buffer b)
+        (print prefix-sibilant-dir)
+        (insert prefix-sibilant-dir)
 
-    (save-excursion
-      (set-buffer b)
-      (insert (concatenate 'string "(meta (assign sibilant.dir  \"./\") null)"))
-      (insert "\n")
-      (end-term-input))))
+        (print prefix-sibilant-add-to-lookup)
+        (insert prefix-sibilant-add-to-lookup)
+
+        )
+      (save-excursion
+
+
+        (print "sending buffer")
+        (set-buffer b)
+        (insert-buffer cb)
+
+        )
+      (save-excursion
+
+        (set-buffer b)
+
+        (print "sending post processing to clean up dependency lookup")
+        (print  postfix-sibilant-reset-dir)
+        (insert postfix-sibilant-reset-dir)
+
+        (insert (end-term-input))))))
 
 (defun send-sibilant-defun ())
 

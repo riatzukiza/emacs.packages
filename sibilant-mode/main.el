@@ -10,6 +10,7 @@
 (load "./font-lock.el")
 
 (add-to-list 'auto-mode-alist (cons "\\.sibilant\\'" 'sibilant-mode))
+(add-to-list 'auto-mode-alist (cons "\\.lith\\'" 'sibilant-mode))
 
 (defvar sibilant-projects (make-hash-table ))
 ;; (defvar test-hash-table (make-hash-table :test #'equal))
