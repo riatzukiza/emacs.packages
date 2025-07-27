@@ -28,7 +28,6 @@
           (prefix-sibilant-add-to-lookup (concat   "(add-to-module-lookup\"" d "\")"))
           (postfix-sibilant-reset-dir (concat   "(meta (assign sibilant.dir  \"./\") null)")))
 
-      ;; (insert "\n")
 
 
       (save-excursion
@@ -36,9 +35,11 @@
         (set-buffer b)
         (print prefix-sibilant-dir)
         (insert prefix-sibilant-dir)
+        (insert "\n")
 
         (print prefix-sibilant-add-to-lookup)
         (insert prefix-sibilant-add-to-lookup)
+        (insert "\n")
 
         )
       (save-excursion
@@ -47,6 +48,7 @@
         (print "sending buffer")
         (set-buffer b)
         (insert-buffer cb)
+        (insert "\n")
 
         )
       (save-excursion
@@ -57,7 +59,12 @@
         (print  postfix-sibilant-reset-dir)
         (insert postfix-sibilant-reset-dir)
 
-        (insert (end-term-input))))))
+        (insert "\n")
+
+        (print (end-term-input))
+        ;; (insert (end-term-input))
+
+        (insert "\n")))))
 
 (defun send-sibilant-defun ())
 

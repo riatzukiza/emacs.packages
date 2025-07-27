@@ -8,8 +8,6 @@
 (autoload 'tern-mode "tern.el" nil t)
 (add-hook 'javascript (lambda () (tern-mode t)))
 
-(defmacro config-layers (&rest body)
-  `(setq-default dotspacemacs-configuration-layers ,@body))
 
 (setq-default dotspacemacs-configuration-layers '((shell :variables shell-default-shell 'eshell)))
 

@@ -71,8 +71,6 @@
 
 
 
-  (dolist '(lambda (char) (modify-syntax-entry char "w" sibilant-mode-syntax-table))
-    '(?_ ?~ ?. ?- ?> ?< ?! ??))
 
   (setq font-lock-defaults '(sibilant-font-lock-defaults))
 
